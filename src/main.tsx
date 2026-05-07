@@ -13,7 +13,7 @@ import Layout from "./Layout.tsx";
 import Home from "./components/Home/Home.tsx";
 import Contact from "./components/Contact/Contact.tsx";
 import About from "./components/About/About.tsx";
-import { ThemeProvider } from "./context/ThemeContext.tsx";
+import { ThemeProvider } from "./context/ThemeContext/ThemeContext.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

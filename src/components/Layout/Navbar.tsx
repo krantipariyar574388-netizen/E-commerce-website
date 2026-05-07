@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Input from "../ShareableComponents/Input";
-import { useTheme } from "@/context/useTheme";
+import { useTheme } from "@/context/ThemeContext/useTheme";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
