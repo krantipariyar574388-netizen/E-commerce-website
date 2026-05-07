@@ -6,25 +6,34 @@ import Input from "../ShareableComponents/Input";
 
 const Footer = () => {
   return (
-    <footer className="bg-bg text-text ">
+    <footer className="bg-background text-foreground ">
 
-      <div className="  pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2 pt-5 pb-10">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
 
-          {/* Brand */}
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Exclusive</h2>
+          {/* BRAND */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold tracking-tight">
+              Exclusive
+            </h2>
 
-            <p className="text-muted mb-4">Subscribe</p>
+            <p className="text-sm text-muted-foreground">
+              Subscribe for updates & offers
+            </p>
 
-            <p className="text-sm text-muted mb-4">
+            <p className="text-xs text-muted-foreground">
               Get 10% off your first order
             </p>
 
-            {/* Input */}
-            <div className="relative max-w-xs">
-              <Input type="email" placeholder="Enter email" className="pr-12" />
+            {/* INPUT */}
+            <div className="relative w-full max-w-sm">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                className="pr-12 bg-background border-border"
+              />
 
               <Button
                 size="icon"
@@ -35,57 +44,82 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Support */}
-          <div>
-            <h3 className="font-semibold mb-4">Support</h3>
+          {/* SUPPORT */}
+          <div className="space-y-3">
+            <h3 className="font-semibold text-foreground">Support</h3>
 
-            <div className="space-y-2 text-sm text-muted">
+            <div className="text-sm text-muted-foreground space-y-2">
               <p>Kathmandu, Nepal</p>
-              <a href="mailto:test@gmail.com" className="hover:text-text">
+              <a
+                href="mailto:test@gmail.com"
+                className="hover:text-foreground transition"
+              >
                 test@gmail.com
               </a>
               <p>+977-9800000000</p>
             </div>
           </div>
 
-          {/* Account */}
-          <div>
-            <h3 className="font-semibold mb-4">Account</h3>
+          {/* ACCOUNT */}
+          <div className="space-y-3">
+            <h3 className="font-semibold">Account</h3>
 
-            <ul className="space-y-2 text-sm text-muted">
-              <li><Link to="/account">My Account</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/cart">Cart</Link></li>
-              <li><Link to="/wishlist">Wishlist</Link></li>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {[
+                ["My Account", "/account"],
+                ["Login", "/login"],
+                ["Cart", "/cart"],
+                ["Wishlist", "/wishlist"],
+              ].map(([label, path]) => (
+                <li key={path}>
+                  <Link
+                    to={path}
+                    className="hover:text-foreground transition"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+          {/* QUICK LINKS */}
+          <div className="space-y-3">
+            <h3 className="font-semibold">Quick Links</h3>
 
-            <ul className="space-y-2 text-sm text-muted">
-              <li><Link to="/privacy">Privacy</Link></li>
-              <li><Link to="/terms">Terms</Link></li>
-              <li><Link to="/faq">FAQ</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {[
+                ["Privacy Policy", "/privacy"],
+                ["Terms", "/terms"],
+                ["FAQ", "/faq"],
+                ["Contact", "/contact"],
+              ].map(([label, path]) => (
+                <li key={path}>
+                  <Link
+                    to={path}
+                    className="hover:text-foreground transition"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* App */}
-          <div>
-            <h3 className="font-semibold mb-4">Download App</h3>
+          {/* APP */}
+          <div className="space-y-4">
+            <h3 className="font-semibold">Download App</h3>
 
-            <p className="text-sm text-muted mb-4">
-              Save $3 on first download
+            <p className="text-sm text-muted-foreground">
+              Save $3 on your first download
             </p>
 
-            <div className="flex gap-3">
-              <button className="border border-border px-3 py-1 rounded">
+            <div className="flex flex-col gap-3">
+              <button className="w-full border border-border rounded-lg px-4 py-2 text-sm hover:bg-muted transition">
                 Play Store
               </button>
 
-              <button className="border border-border px-3 py-1 rounded">
+              <button className="w-full border border-border rounded-lg px-4 py-2 text-sm hover:bg-muted transition">
                 App Store
               </button>
             </div>
@@ -93,11 +127,27 @@ const Footer = () => {
 
         </div>
 
-        <Separator className="my-8 bg-border" />
+        {/* SEPARATOR */}
+        <Separator className="my-10 bg-border" />
 
-        <p className="text-center text-sm text-muted">
-          © 2026 Exclusive. All rights reserved.
-        </p>
+        {/* BOTTOM */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
+
+          <p>© 2026 Exclusive. All rights reserved.</p>
+
+          <div className="flex gap-4">
+            <Link className="hover:text-foreground transition" to="#">
+              Privacy
+            </Link>
+            <Link className="hover:text-foreground transition" to="#">
+              Terms
+            </Link>
+            <Link className="hover:text-foreground transition" to="#">
+              Support
+            </Link>
+          </div>
+
+        </div>
 
       </div>
     </footer>

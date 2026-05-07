@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
@@ -9,6 +9,7 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import Input from "../ShareableComponents/Input";
 import { useTheme } from "@/context/ThemeContext/useTheme";
@@ -29,76 +30,102 @@ const Navbar = () => {
     href === "/" ? location.pathname === "/" : location.pathname.startsWith(href);
 
   return (
-    <header className="w-full">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl">
 
       {/* Top Bar */}
-      <div className="bg-bg text-text border-b border-border py-2 text-sm">
-        <div className=" px-4 flex justify-between items-center">
-          <p className="text-center w-full">
-            Summer Sale - 50% OFF{" "}
-            <Link to="#" className="underline">
-              ShopNow
-            </Link>
-          </p>
+      <div className="bg-primary-foreground text-primary text-xs md:text-sm">
+        <div className="max-w-7xl mx-auto px-4 py-2 text-center">
+          Summer Sale - 50% OFF{" "}
+          <Link to="#" className="underline hover:opacity-80">
+            ShopNow
+          </Link>
         </div>
       </div>
 
-      {/* Navbar */}
-      <nav className="bg-bg text-text  sticky top-0 z-50">
-        <div className=" flex items-center justify-between h-16">
+      {/* Main Navbar */}
+      <nav className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold">
+          <Link
+            to="/"
+            className="text-xl font-bold tracking-tight text-foreground hover:opacity-80 transition"
+          >
             Exclusive
           </Link>
 
-          {/* Links */}
-          <div className="hidden md:flex gap-8">
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm transition ${
+                className={`text-sm font-medium transition relative ${
                   isActive(link.href)
-                    ? "border-b border-text"
-                    : "text-muted hover:text-text"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {link.label}
+
+                {/* modern underline */}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-primary transition-all duration-300 ${
+                    isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
               </Link>
             ))}
           </div>
 
-          {/* Right Section */}
-          <div className="flex items-center gap-3">
+          {/* Right Actions */}
+          <div className="flex items-center gap-2">
 
             {/* Search */}
-            <div className="hidden md:block w-64 relative">
-              <Input placeholder="Search..." />
-              <Search className="absolute right-3 top-2.5 text-muted" size={18} />
+            <div className="hidden md:flex relative w-64">
+              <Input
+                placeholder="Search products..."
+                className="pr-10 bg-background border-border text-foreground placeholder:text-muted-foreground"
+              />
+              <Search className="absolute right-3 top-2.5 text-muted-foreground" size={18} />
             </div>
 
-            <Button variant="ghost" size="icon">
-              <Heart />
+            {/* Wishlist */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full text-foreground hover:bg-muted"
+            >
+              <Heart className="h-5 w-5" />
             </Button>
 
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart />
-              <span className="absolute -top-1 -right-1 text-xs bg-red-500 text-white w-4 h-4 rounded-full flex items-center justify-center">
+            {/* Cart */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative rounded-full text-foreground hover:bg-muted"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              <span className="absolute -top-1 -right-1 text-[10px] bg-primary text-primary-foreground w-4 h-4 rounded-full flex items-center justify-center">
                 3
               </span>
             </Button>
 
-            {/* Theme Toggle */}
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === "dark" ? <Sun /> : <Moon />}
-            </Button>
-
-            {/* Mobile Menu */}
+            {/* Theme */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              onClick={toggleTheme}
+              className="rounded-full text-foreground hover:bg-muted"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </Button>
+
+            {/* Mobile menu */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-foreground hover:bg-muted"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
@@ -108,13 +135,13 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-bg border-t border-border p-4 flex flex-col gap-4">
+          <div className="md:hidden border-t border-border bg-background px-4 py-4 space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-muted hover:text-text"
+                className="block text-sm text-muted-foreground hover:text-foreground transition"
               >
                 {link.label}
               </Link>
