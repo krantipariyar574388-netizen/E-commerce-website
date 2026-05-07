@@ -19,16 +19,23 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="contact" element={<Contact />}/>
-      <Route path="about" element={<About />}/>
+      <Route path="contact" element={<Contact />} />
+      <Route path="about" element={<About />} />
     </Route>
   )
 );
 
-createRoot(document.getElementById("root")).render(
+// ✅ FIX HERE
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <ThemeProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>
 );
