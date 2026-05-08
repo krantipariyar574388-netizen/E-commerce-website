@@ -24,6 +24,7 @@ const Navbar = () => {
     { label: "Contact", href: "/contact" },
     { label: "About", href: "/about" },
     { label: "Sign Up", href: "/signup" },
+    { label: "Login", href: "/login" },
   ];
 
   const isActive = (href: string) =>

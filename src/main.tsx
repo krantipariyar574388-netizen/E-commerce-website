@@ -14,6 +14,7 @@ import Home from "./components/Home/Home.tsx";
 import Contact from "./components/Contact/Contact.tsx";
 import About from "./components/About/About.tsx";
 import { ThemeProvider } from "./context/ThemeContext/ThemeContext.tsx";
+import Login from "./components/Auth/Login.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="contact" element={<Contact />} />
       <Route path="about" element={<About />} />
+      <Route path="login" element={<Login />} />
     </Route>
   )
 );
